@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import { UserContext } from "../../contexts/user.context";
 import "./sign-in-form.style.scss";
 import {
   createUserDocFromAuth,
@@ -13,6 +14,8 @@ const SignInForm = () => {
     email: "",
     password: "",
   };
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const [formFields, setFormFields] = useState(fields);
 
@@ -46,8 +49,10 @@ const SignInForm = () => {
         password
       );
 
-      console.log(response);
-      // resetFormFields();
+      if (response) {
+        setCurrentUser(response.user);
+      }
+      resetFormFields();
     } catch (error) {
       if (error.code === "auth/invalid-login-credentials") {
         alert("User don't match in our records !");
