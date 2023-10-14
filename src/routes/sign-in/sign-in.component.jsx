@@ -4,6 +4,9 @@ import {
   createUserDocFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
+import SignUp from "../../components/sign-up-form/sign-up-form.component";
+import Button from "../../components/button/button.component";
+
 const SignIn = () => {
   const logGoogleUser = async () => {
     try {
@@ -14,10 +17,21 @@ const SignIn = () => {
     }
   };
 
+  const buttonAttributes = { type: "button", onClick: logGoogleUser };
+
   return (
-    <div>
-      <h1>Sign in</h1>
-      <button onClick={logGoogleUser}>Sign in with google</button>
+    <div
+      style={{ display: "flex", flexDirection: "row", justifyContent : "space-evenly" , alignItems: "center" }}
+    >
+      <div>
+        <h1>Sign in</h1>
+        <Button buttonType="google" attributes={buttonAttributes}>
+          Sign in with google
+        </Button>
+      </div>
+      <div>
+        <SignUp />
+      </div>
     </div>
   );
 };
