@@ -9,7 +9,7 @@ import {
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
-const SignUp = () => {
+const SignUpForm = () => {
   const fields = {
     displayName: "",
     email: "",
@@ -30,7 +30,7 @@ const SignUp = () => {
     });
   }
 
-  const resetFormFIelds = () => setFormFields(fields);
+  const resetFormFields = () => setFormFields(fields);
 
   async function submitData(event) {
     event.preventDefault();
@@ -50,7 +50,7 @@ const SignUp = () => {
         response.user.displayName = displayName;
         await createUserDocFromAuth(response.user);
 
-        resetFormFIelds();
+        resetFormFields();
       }
 
       return;
@@ -121,4 +121,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpForm;
