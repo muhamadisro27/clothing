@@ -30,6 +30,8 @@ const SignInForm = () => {
     try {
       const { user } = await signInWithGooglePopup();
       await createUserDocFromAuth(user);
+
+      resetFormFields();
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +91,10 @@ const SignInForm = () => {
           >
             Sign In
           </Button>
-          <Button buttonType="google" attributes={{ type: "button", onClick: logGoogleUser }}>
+          <Button
+            buttonType="google"
+            attributes={{ type: "button", onClick: logGoogleUser }}
+          >
             Sign in with google
           </Button>
         </div>
