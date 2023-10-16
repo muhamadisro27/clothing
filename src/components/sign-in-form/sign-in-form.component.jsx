@@ -1,10 +1,8 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import { UserContext } from "../../contexts/user.context";
 import "./sign-in-form.style.scss";
 import {
-  createUserDocFromAuth,
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
@@ -14,8 +12,6 @@ const SignInForm = () => {
     email: "",
     password: "",
   };
-
-  const { setCurrentUser } = useContext(UserContext);
 
   const [formFields, setFormFields] = useState(fields);
 
@@ -31,10 +27,7 @@ const SignInForm = () => {
 
   const logGoogleUser = async () => {
     try {
-      const { user } = await signInWithGooglePopup();
-      await createUserDocFromAuth(user);
-
-      resetFormFields();
+      await signInWithGooglePopup();
     } catch (error) {
       console.log(error);
     }
@@ -44,14 +37,7 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      if (response) {
-        setCurrentUser(response.user);
-      }
+      await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/invalid-login-credentials") {
