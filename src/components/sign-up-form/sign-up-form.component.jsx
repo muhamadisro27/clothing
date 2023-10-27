@@ -6,7 +6,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
 const SignUpForm = () => {
@@ -47,7 +47,6 @@ const SignUpForm = () => {
       );
 
       if (response) {
-
         await createUserDocFromAuth(response.user, { displayName });
 
         resetFormFields();
@@ -110,6 +109,7 @@ const SignUpForm = () => {
           }}
         />
         <Button
+          buttonType={BUTTON_TYPE_CLASSES.base}
           attributes={{
             type: "submit",
           }}
