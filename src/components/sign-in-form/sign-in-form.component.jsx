@@ -1,11 +1,11 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import "./sign-in-form.style.scss";
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
+import { ButtonContainer, SignInContainer } from "./sign-in-form.style.jsx";
 
 const SignInForm = () => {
   const fields = {
@@ -50,7 +50,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-in-container">
+    <SignInContainer>
       <h2>I Already have an account</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={(e) => submitData(e)}>
@@ -74,7 +74,7 @@ const SignInForm = () => {
             required: true,
           }}
         />
-        <div className="buttons-container">
+        <ButtonContainer>
           <Button
             buttonType={BUTTON_TYPE_CLASSES.base}
             attributes={{
@@ -89,9 +89,9 @@ const SignInForm = () => {
           >
             Sign in with google
           </Button>
-        </div>
+        </ButtonContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
