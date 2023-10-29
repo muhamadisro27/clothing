@@ -1,7 +1,8 @@
 import DirectoryItem from "../directory-item/directory-item.component";
+import categories from "../../data/categories.json";
 import { DirectoryContainer } from "./directory.style.jsx";
 
-const Directory = ({categories}) => {
+const Directory = () => {
   return (
     <DirectoryContainer>
       {categories.map((category) => (

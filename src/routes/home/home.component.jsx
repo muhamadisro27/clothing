@@ -1,10 +1,9 @@
-import categories from "../../data/categories.json";
 import Directory from "../../components/directory/directory.component";
 
 const Home = () => {
   return (
     <>
-      <Directory categories={categories} />
+      <Directory />
     </>
   );
 };
