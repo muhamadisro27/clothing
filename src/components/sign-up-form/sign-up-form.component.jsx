@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import "./sign-up-form.style.scss";
+import {SignUpContainer} from "./sign-up-form.style.jsx";
 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
 const SignUpForm = () => {
@@ -47,7 +47,6 @@ const SignUpForm = () => {
       );
 
       if (response) {
-
         await createUserDocFromAuth(response.user, { displayName });
 
         resetFormFields();
@@ -65,7 +64,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="sign-up-container">
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={(e) => submitData(e)}>
@@ -110,6 +109,7 @@ const SignUpForm = () => {
           }}
         />
         <Button
+          buttonType={BUTTON_TYPE_CLASSES.base}
           attributes={{
             type: "submit",
           }}
@@ -117,7 +117,7 @@ const SignUpForm = () => {
           Sign Up
         </Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
