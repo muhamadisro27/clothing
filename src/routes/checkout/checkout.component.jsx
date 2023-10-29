@@ -6,6 +6,7 @@ import {
   CheckoutHeader,
   HeaderBlock,
   Total,
+  EmptyData
 } from "./checkout.style.jsx";
 
 const Checkout = () => {
@@ -16,7 +17,7 @@ const Checkout = () => {
       ? cartItems.map((cartItem) => (
           <CheckoutItem key={cartItem.id} cartItem={cartItem} />
         ))
-      : "No Data";
+      : (<EmptyData>No Data.</EmptyData>);
   };
 
   const columns = ["Product", "Description", "Quantity", "Price", "Remove"];

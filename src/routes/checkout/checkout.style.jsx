@@ -30,3 +30,8 @@ export const Total = styled.div`
   margin-left: auto;
   font-size: 36px;
 `;
+
+export const EmptyData = styled.span`
+  margin-top: 30px;
+  font-size: 20px;
+`
