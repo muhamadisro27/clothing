@@ -10,7 +10,7 @@ import Checkout from './routes/checkout/checkout.component';
 import { setCurrentUser } from './store/user/user.action';
 import {
   onAuthStateChangedListener,
-  createUserDocFromAuth,
+  createUserDocFromAuth
 } from './utils/firebase/firebase.utils';
 
 const App = () => {
