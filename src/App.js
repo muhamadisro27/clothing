@@ -22,7 +22,7 @@ const App = () => {
         createUserDocFromAuth(user);
       }
 
-      // dispatch(setCurrentUser(user));
+      dispatch(setCurrentUser(user));
     });
 
     return unsubscribe;

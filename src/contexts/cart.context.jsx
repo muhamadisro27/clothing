@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { createAction } from "../utils/reducer/reducer.utils.ts";
+import { createAction } from "../utils/reducer/reducer.utils.js";
 
 export const CartContext = createContext({
   isCartOpen: false,
