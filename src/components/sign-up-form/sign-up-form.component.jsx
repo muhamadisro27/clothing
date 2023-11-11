@@ -8,6 +8,8 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
+import { useDispatch } from "react-redux";
+import { signUpStart } from "../../store/user/user.action.js";
 
 const SignUpForm = () => {
   const fields = {
@@ -18,6 +20,7 @@ const SignUpForm = () => {
   };
 
   const [formFields, setFormFields] = useState(fields);
+  const dispatch = useDispatch();
 
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -41,18 +44,10 @@ const SignUpForm = () => {
     }
 
     try {
-      const response = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      dispatch(signUpStart(email, password, displayName));
+   
+      resetFormFields();
 
-      if (response) {
-        await createUserDocFromAuth(response.user, { displayName });
-
-        resetFormFields();
-      }
-
-      return;
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("Email already in use !");
