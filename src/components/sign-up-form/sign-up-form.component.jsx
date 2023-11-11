@@ -1,15 +1,12 @@
 import { useState } from "react";
 
-import {SignUpContainer} from "./sign-up-form.style.jsx";
+import { SignUpContainer } from "./sign-up-form.style.jsx";
 
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocFromAuth,
-} from "../../utils/firebase/firebase.utils";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUpStart } from "../../store/user/user.action.js";
+import { selectIsError } from "../../store/user/user.selector.js";
 
 const SignUpForm = () => {
   const fields = {
@@ -33,6 +30,8 @@ const SignUpForm = () => {
     });
   }
 
+  const error = useSelector(selectIsError);
+
   const resetFormFields = () => setFormFields(fields);
 
   async function submitData(event) {
@@ -45,10 +44,12 @@ const SignUpForm = () => {
 
     try {
       dispatch(signUpStart(email, password, displayName));
-   
-      resetFormFields();
 
+      if(!error) {
+        resetFormFields();
+      }
     } catch (error) {
+      // console.log(error, 'error');
       if (error.code === "auth/email-already-in-use") {
         alert("Email already in use !");
         return;
