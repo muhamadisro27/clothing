@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-import {SignUpContainer} from "./sign-up-form.style.jsx";
+import { SignUpContainer } from "./sign-up-form.style.jsx";
 
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocFromAuth,
-} from "../../utils/firebase/firebase.utils";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpStart } from "../../store/user/user.action.js";
+import { selectIsError } from "../../store/user/user.selector.js";
 
 const SignUpForm = () => {
   const fields = {
@@ -18,6 +17,7 @@ const SignUpForm = () => {
   };
 
   const [formFields, setFormFields] = useState(fields);
+  const dispatch = useDispatch();
 
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -30,6 +30,8 @@ const SignUpForm = () => {
     });
   }
 
+  const error = useSelector(selectIsError);
+
   const resetFormFields = () => setFormFields(fields);
 
   async function submitData(event) {
@@ -41,19 +43,13 @@ const SignUpForm = () => {
     }
 
     try {
-      const response = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      dispatch(signUpStart(email, password, displayName));
 
-      if (response) {
-        await createUserDocFromAuth(response.user, { displayName });
-
+      if(!error) {
         resetFormFields();
       }
-
-      return;
     } catch (error) {
+      // console.log(error, 'error');
       if (error.code === "auth/email-already-in-use") {
         alert("Email already in use !");
         return;
