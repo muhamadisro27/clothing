@@ -21,28 +21,29 @@ const PaymentForm = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ amount: 2000 }),
-    }).then((res) => res.json());
+    }).then((res) => res.json()).catch((error) => console.log(error, 'error form'));
 
-    const {
-      paymentIntent: { client_secret },
-    } = response.paymentIntent;
+    console.log(response)
+    // const {
+    //   paymentIntent: { client_secret },
+    // } = response.paymentIntent;
 
-    const paymentResult = await stripe.confirmCardPayment(client_secret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          name: "Isro",
-        },
-      },
-    });
+    // const paymentResult = await stripe.confirmCardPayment(client_secret, {
+    //   payment_method: {
+    //     card: elements.getElement(CardElement),
+    //     billing_details: {
+    //       name: "Isro",
+    //     },
+    //   },
+    // });
 
-    if (paymentResult.error) {
-      alert(paymentResult.error);
-    } else {
-      if (paymentResult.paymentIntent.status === "succeeded") {
-        alert("Payment Successful");
-      }
-    }
+    // if (paymentResult.error) {
+    //   alert(paymentResult.error);
+    // } else {
+    //   if (paymentResult.paymentIntent.status === "succeeded") {
+    //     alert("Payment Successful");
+    //   }
+    // }
   };
   return (
     <PaymentFormContainer>
