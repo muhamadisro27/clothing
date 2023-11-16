@@ -11,7 +11,7 @@ import {
   PaymentFormContainer,
   FormContainer,
   PaymentButton,
-} from "./payment-form.styles";
+} from "./payment-form.style";
 
 const ifValidCardElement = (card) => card !== null;
 
